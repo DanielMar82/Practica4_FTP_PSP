@@ -17,9 +17,12 @@ public class MainCliente {
         String serverFTP = sc.next();
         System.out.println("--- Ingresa el usuario: ---");
         String usuario = sc.next();
-        System.out.println("--- Ingresa la contraseña: ---");
-        String clave = sc.next();
 
+        String clave = "";
+        if(!usuario.equalsIgnoreCase("anonymous")) {
+            System.out.println("--- Ingresa la contraseña: ---");
+            clave = sc.next();
+        }
 
         System.out.println("Nos vamos a conectar a "+ serverFTP);
 
@@ -99,7 +102,6 @@ public class MainCliente {
                         String rutaDestino = "descargas/"+ archivoBajar;
 
                         try {
-
                             FTPFile[] archivos = cliente.listFiles();
                             boolean existe = false;
                             for(FTPFile archivo : archivos) {
@@ -119,7 +121,6 @@ public class MainCliente {
                             }
 
                             BufferedOutputStream out= new BufferedOutputStream(new FileOutputStream(rutaDestino));
-
                             boolean descargado = cliente.retrieveFile(archivoBajar, out);
                             out.close();
 
